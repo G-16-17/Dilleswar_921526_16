@@ -1,0 +1,127 @@
+
+Hands-on-1
+- - - - - -  -
+C:\Users\dillu>docker --version
+Docker version 20.10.8, build 3967b7d
+
+C:\Users\dillu>docker image ls
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+
+C:\Users\dillu>docker container ls
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+C:\Users\dillu>docker run -it debian
+Unable to find image 'debian:latest' locally
+latest: Pulling from library/debian
+955615a668ce: Pull complete
+Digest: sha256:08db48d59c0a91afb802ebafc921be3154e200c452e4d0b19634b426b03e0e25
+Status: Downloaded newer image for debian:latest
+root@81d1a6e2495d:/# pwd
+/
+root@81d1a6e2495d:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@81d1a6e2495d:/# uname -a
+Linux 81d1a6e2495d 5.10.47-linuxkit #1 SMP Sat Jul 3 21:51:47 UTC 2021 x86_64 GNU/Linux
+root@81d1a6e2495d:/# echo hello-world
+hello-world
+root@81d1a6e2495d:/# exit
+exit
+
+
+
+Hands-on 2
+- - - - - -
+C:\Users\dillu>docker pull nginx:1.17.5
+1.17.5: Pulling from library/nginx
+8d691f585fa8: Pull complete
+5b07f4e08ad0: Pull complete
+abc291867bca: Pull complete
+Digest: sha256:922c815aa4df050d4df476e92daed4231f466acc8ee90e0e774951b0fd7195a4
+Status: Downloaded newer image for nginx:1.17.5
+docker.io/library/nginx:1.17.5
+
+C:\Users\dillu>docker image ls
+REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
+nginx        1.17.5    540a289bab6c   23 months ago   126MB
+
+C:\Users\dillu>docker container ls -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+C:\Users\dillu>docker run --name my-nginx -d -p 8085:80 -v E:\docker-learn\html:/usr/share/nginx/html nginx:1.17.5
+51e5fd15937b775ea333a5137d1b72e56bf0a085755fc6d3742d3376da9c3360
+
+C:\Users\dillu>docker image ls
+REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
+nginx        1.17.5    540a289bab6c   23 months ago   126MB
+
+C:\Users\dillu>docker container ls
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS                                   NAMES
+51e5fd15937b   nginx:1.17.5   "nginx -g 'daemon of…"   58 seconds ago   Up 55 seconds   0.0.0.0:8085->80/tcp, :::8085->80/tcp   my-nginx
+
+C:\Users\dillu>docker image ls
+REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
+nginx        1.17.5    540a289bab6c   23 months ago   126MB
+
+C:\Users\dillu>docker stop my-nginx
+my-nginx
+
+C:\Users\dillu>docker container ls
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+C:\Users\dillu>docker container ls -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS                      PORTS     NAMES
+51e5fd15937b   nginx:1.17.5   "nginx -g 'daemon of…"   3 minutes ago   Exited (0) 24 seconds ago             my-nginx
+
+C:\Users\dillu>docker start my-nginx
+my-nginx
+
+C:\Users\dillu>docker container ls
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS          PORTS                                   NAMES
+51e5fd15937b   nginx:1.17.5   "nginx -g 'daemon of…"   4 minutes ago   Up 25 seconds   0.0.0.0:8085->80/tcp, :::8085->80/tcp   my-nginx
+
+C:\Users\dillu>docker stop 51e
+51e
+
+C:\Users\dillu>cd /d E:
+
+E:\>cd docker-learn
+
+E:\docker-learn>cd html
+
+E:\docker-learn\html>docker build .
+[+] Building 2.3s (2/2) FINISHED
+ => [internal] load build definition from Dockerfile                                                               3.3s
+ => => transferring dockerfile: 2B                                                                                 0.0s
+ => [internal] load .dockerignore                                                                                  2.9s
+ => => transferring context: 2B                                                                                    0.1s
+
+E:\docker-learn\html>docker container ls
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS         PORTS                                   NAMES
+51e5fd15937b   nginx:1.17.5   "nginx -g 'daemon of…"   18 minutes ago   Up 5 minutes   0.0.0.0:8085->80/tcp, :::8085->80/tcp   my-nginx
+
+E:\docker-learn\html>docker stop 51e
+51e
+
+E:\docker-learn\html>docker image ls
+REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
+nginx        1.17.5    540a289bab6c   23 months ago   126MB
+
+E:\docker-learn\html>docker image ls
+REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
+nginx        1.17.5    540a289bab6c   23 months ago   126MB
+
+E:\docker-learn\html>docker stop 51e
+51e
+
+E:\docker-learn\html>docker rm 51e
+51e
+
+E:\docker-learn\html>docker rmi 540
+Untagged: nginx:1.17.5
+Untagged: nginx@sha256:922c815aa4df050d4df476e92daed4231f466acc8ee90e0e774951b0fd7195a4
+Deleted: sha256:540a289bab6cb1bf880086a9b803cf0c4cefe38cbb5cdefa199b69614525199f
+Deleted: sha256:ab18af7cee69bfb22c1771e54d5e0e68b1a1bf57bb46516142da0380b1771f4a
+Deleted: sha256:02f7daf1e14541cd61a3dda1a61cc0f78fee8de2984d488b8ba5bbd3cbad9b57
+Deleted: sha256:b67d19e65ef653823ed62a5835399c610a40e8205c16f839c5cc567954fcf594
+
+
