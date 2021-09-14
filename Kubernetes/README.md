@@ -1,1 +1,0 @@
-Hands on of Kubernetes
