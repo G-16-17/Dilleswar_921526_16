@@ -1,0 +1,6 @@
+com\cloud\spring\model\Employee.class
+com\cloud\spring\service\EmployeeServiceImpl.class
+com\cloud\spring\repository\EmployeeRepository.class
+com\cloud\spring\controller\EmployeeController.class
+com\cloud\spring\CloudSpringApplication.class
+com\cloud\spring\service\EmployeeService.class
